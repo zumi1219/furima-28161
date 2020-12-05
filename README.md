@@ -37,7 +37,7 @@ Things you may want to cover:
 
 ### Association
  has_many :products
- has_many :shoppinghistory
+ has_many :shoppinghistorys
 
 ## productテーブル
 |Column|Type|Options|
@@ -60,7 +60,7 @@ has_one :shoppinghistory
 |Column|Type|Options|
 |------|----|-------|
 | post_code | string | null: false|
-| prefecture_id | integer | null: false|
+| deliveryarea_id | integer | null: false|
 | city | string | null: false|
 | address | string | null: false|
 | building_name | string |      |
@@ -79,3 +79,4 @@ has_one :shoppinghistory
 ### Association
 belongs_to :user
 belongs_to :product
+belongs_to :order
