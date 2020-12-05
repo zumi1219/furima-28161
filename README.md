@@ -79,4 +79,4 @@ has_one :shoppinghistory
 ### Association
 belongs_to :user
 belongs_to :product
-belongs_to :order
+has_one :order
