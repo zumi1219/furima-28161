@@ -12,7 +12,7 @@ class Product < ApplicationRecord
     validates :title, :text, :category_id, :sales_status_id, :deliveryfee_id, :deliveryarea_id, :deliveryday_id
 
     with_options format: {with: /\A[0-9]+\z/} do
-      validates :price, length: { in: (300..9999999)}
+      validates :price, numericality: { greater_than: 300 }, numericality: { less_than: 9999999}
     end
   end
 end
