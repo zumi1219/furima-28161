@@ -9,10 +9,14 @@ class Product < ApplicationRecord
   belongs_to_active_hash :deliveryday
 
   with_options presence: true do
-    validates :title, :text, :category_id, :sales_status_id, :deliveryfee_id, :deliveryarea_id, :deliveryday_id
+    validates :title, :text, :image, :category_id, :sales_status_id
+  end
 
-    with_options format: {with: /\A[0-9]+\z/} do
-      validates :price, numericality: { greater_than: 300 }, numericality: { less_than: 9999999}
-    end
+  with_options numericality: { other_than: 1 } do
+    validates :category_id, :sales_status_id, :deliveryfee_id, :deliveryarea_id, :deliveryday_id
+  end
+
+  with_options format: {with: /\A[0-9]+\z/} do
+    validates :price, numericality: { greater_than: 300, less_than: 9999999}
   end
 end
