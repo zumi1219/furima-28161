@@ -47,21 +47,21 @@ RSpec.describe Product, type: :model do
         end
 
         it 'deliveryfee_idが空では登録されない' do
-          @product.deliveryfee_id = nil
+          @product.deliveryfee_id = '1'
           @product.valid?
-          expect(@product.errors.full_messages).to include("Deliveryfee is not a number")
+          expect(@product.errors.full_messages).to include("Deliveryfee must be other than 1")
         end
 
         it'deliveryarea_idが空では登録されない' do
-          @product.deliveryarea_id = nil
+          @product.deliveryarea_id = '1'
           @product.valid?
-          expect(@product.errors.full_messages).to include("Deliveryarea is not a number")
+          expect(@product.errors.full_messages).to include("Deliveryarea must be other than 1")
         end
 
         it 'deliveryday_idが空では登録されない' do
-          @product.deliveryday_id = nil
+          @product.deliveryday_id = '1'
           @product.valid?
-          expect(@product.errors.full_messages).to include("Deliveryday is not a number")
+          expect(@product.errors.full_messages).to include("Deliveryday must be other than 1")
         end
 
         it 'priceが空では登録されない' do
@@ -77,7 +77,7 @@ RSpec.describe Product, type: :model do
         end
 
         it 'priceが300より少ないと登録できない' do
-          @product.price = 50
+          @product.price = 299
           @product.valid?
           expect(@product.errors.full_messages).to include("Price must be greater than 300")
         end
@@ -93,6 +93,13 @@ RSpec.describe Product, type: :model do
           @product.valid?
           expect(@product.errors.full_messages).to include("Category must be other than 1")
         end
+
+        it 'sales_status_idが空では登録されない' do
+          @product.sales_status_id = '1'
+          @product.valid?
+          expect(@product.errors.full_messages).to include("Sales status must be other than 1")
+        end
+
 
         end
       end
