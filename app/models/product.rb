@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   belongs_to_active_hash :deliveryday
 
   with_options presence: true do
-    validates :title, :text, :image, :category_id, :sales_status_id
+    validates :title, :text, :image, :category_id, :sales_status_id, :price
   end
 
   with_options numericality: { other_than: 1 } do
