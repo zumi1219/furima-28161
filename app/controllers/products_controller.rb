@@ -7,7 +7,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def new
@@ -25,7 +24,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
@@ -37,7 +35,7 @@ class ProductsController < ApplicationController
   end
 end
 
-  def set_item
+  def set_product
     @product = Product.find(params[:id])
   end
 
