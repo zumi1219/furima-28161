@@ -1,8 +1,12 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @product = Product.all.order(created_at: "DESC")
+  end
+
+  def show
+    @product = Product.find(params[:id])
   end
 
   def new
