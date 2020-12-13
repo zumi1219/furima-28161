@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :deliveryarea do
+  factory :shoppinghistory do
     
   end
 end
