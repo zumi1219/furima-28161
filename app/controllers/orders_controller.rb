@@ -7,10 +7,11 @@ class OrdersController < ApplicationController
   end
 
   def create
+
     @product = Product.find(params[:product_id])
     
     @order = ProductShoppinghistory.new(order_params)
-    # binding.pry
+   
     if @order.valid?
       pay_item
       @order.save
@@ -23,11 +24,12 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:token, :post_code, :deliveryarea_id, :city, :adress, :building_name, :phone_number, :product_id).merge(user_id: current_user.id)
+    params.require(:product_shoppinghistory).permit(:token, :post_code, :deliveryarea_id, :city, :address, :building_name, :phone_number, :product_id).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
   end
 
 
   def pay_item
+
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
       amount: @product.price,  # 商品の値段

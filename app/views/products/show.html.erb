@@ -8,7 +8,7 @@
     <div class='item-img-content'>
       <%= image_tag @product.image ,class:"item-box-img" %>
 
-    <% if @shoppinghistory != nil %>
+    <% if @product.shoppinghistory %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
       </div>
@@ -31,7 +31,7 @@
     <%= link_to '削除', product_path(@product.id), method: :delete, class:'item-destroy' %>
    <% else %>
       <%= link_to '購入画面に進む', product_orders_path(@product.id), method: :get, class:"item-red-btn"%>
-    <% end %>
+  <% end %>
     
 
     <div class="item-explain-box">
