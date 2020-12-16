@@ -7,9 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-
     @product = Product.find(params[:product_id])
-    
     @order = ProductShoppinghistory.new(order_params)
    
     if @order.valid?

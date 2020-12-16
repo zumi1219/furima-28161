@@ -39,6 +39,12 @@ it 'deliveryarea_idが空の場合保存できないこと' do
   expect(@product_shoppinghistory.errors.full_messages).to include("Deliveryarea can't be blank", "Deliveryarea can't be blank")
 end
 
+it 'deliveryarea_idが0の場合保存できないこと' do
+  @product_shoppinghistory.deliveryarea_id = 0
+  @product_shoppinghistory.valid?
+  expect(@product_shoppinghistory.errors.full_messages).to include("Deliveryarea can't be blank", "Deliveryarea can't be blank")
+end
+
 it 'cityが存在していない場合保存できないこと' do
   @product_shoppinghistory.city = nil
   @product_shoppinghistory.valid?
