@@ -10,6 +10,11 @@ end
 
 
 context '商品購入ができる時' do
+
+  it '全ての項目が正しく入力されていれば登録できること' do
+    expect(@product_shoppinghistory).to be_valid
+  end
+
   it 'building_nameが存在していないなくても保存できること' do
     @product_shoppinghistory.building_name = nil
     expect(@product_shoppinghistory).to be_valid
