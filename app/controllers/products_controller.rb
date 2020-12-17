@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit , :update]
+  
 
   def index
     @product = Product.all.order(created_at: "DESC")
@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path unless current_user == @product.user
   end
 
   def update

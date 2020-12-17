@@ -2,9 +2,14 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @product = Product.find(params[:product_id])
-    @order = ProductShoppinghistory.new
-  end
+      @product = Product.find(params[:product_id])
+      @order = ProductShoppinghistory.new
+      if current_user.id == @product.user_id ||@product.shoppinghistory.present?
+        redirect_to root_path
+      else
+        render :index
+      end
+    end
 
   def create
     @product = Product.find(params[:product_id])

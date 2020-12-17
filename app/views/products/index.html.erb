@@ -136,10 +136,12 @@
           <%= image_tag product.image, class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
-        <% if @shoppinghistory != nil %>
+        <% if product.shoppinghistory.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
+        <% else %>
+          <% %>
         <% end %> 
           <%# //商品が売れていればsold outを表示しましょう %>
 
@@ -163,7 +165,7 @@
 
       <%# 商品がない場合のダミー %>
       <%# 商品がある場合は表示されないようにしましょう %>
-      <%# if @product.length == 0 %>
+
       <% else %>
       <li class='list'>
         <%= link_to '#' do %>
