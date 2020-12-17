@@ -12,7 +12,7 @@ include ActiveModel::Model
   validates :deliveryarea_id, numericality: { other_than: 0, message: "can't be blank" }
 
   def save
-    shoppinghistory_id = Shoppinghistory.create(product_id: product_id, user_id: user_id)
+    shoppinghistory = Shoppinghistory.create(product_id: product_id, user_id: user_id)
     Order.create(post_code: post_code, deliveryarea_id: deliveryarea_id, city: city, address: address, building_name: building_name, phone_number: phone_number, shoppinghistory_id: shoppinghistory.id)
   end
 
