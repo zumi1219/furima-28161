@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product
 
   def index
-      @product = Product.find(params[:product_id])
       @order = ProductShoppinghistory.new
       if current_user.id == @product.user_id ||@product.shoppinghistory.present?
         redirect_to root_path
@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
     end
 
   def create
-    @product = Product.find(params[:product_id])
     @order = ProductShoppinghistory.new(order_params)
    
     if @order.valid?
@@ -27,7 +26,11 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:product_shoppinghistory).permit(:token, :post_code, :deliveryarea_id, :city, :address, :building_name, :phone_number, :product_id).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
+    params.require(:product_shoppinghistory).permit(:token, :post_code, :deliveryarea_id, :city, :address, :building_name, :phone_number,).merge(user_id: current_user.id, product_id: params[:product_id], token: params[:token])
+  end
+
+  def set_product
+    @product = Product.find(params[:product_id])
   end
 
 

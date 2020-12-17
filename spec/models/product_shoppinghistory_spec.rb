@@ -2,23 +2,26 @@ require 'rails_helper'
 
 RSpec.describe ProductShoppinghistory, type: :model do
     before do
-    @product_shoppinghistory = FactoryBot.build(:product_shoppinghistory)
+      user = FactoryBot.create(:user)
+      product = FactoryBot.create(:product)
+      @product_shoppinghistory = FactoryBot.build(:product_shoppinghistory, user_id: user.id, product_id: product.id)
+      sleep(1)
 end
 
 
-it '全ての項目が入力されていれば購入ができる' do
-  expect(@product_shoppinghistory).to be_valid
+context '商品購入ができる時' do
+  it 'building_nameが存在していないなくても保存できること' do
+    @product_shoppinghistory.building_name = nil
+    expect(@product_shoppinghistory).to be_valid
+  end
 end
 
-it 'building_nameが存在していないなくても保存できること' do
-  @product_shoppinghistory.building_name = nil
-  expect(@product_shoppinghistory).to be_valid
-end
-
-it 'post_codeが存在していない場合保存できないこと' do
-  @product_shoppinghistory.post_code = nil
-  @product_shoppinghistory.valid?
-  expect(@product_shoppinghistory.errors.full_messages).to include("Post code can't be blank", "Post code can't be blank", "Post code is invalid. Include hyphen(-)")
+context '商品購入ができない時' do
+  it 'post_codeが存在していない場合保存できないこと' do
+    @product_shoppinghistory.post_code = nil
+    @product_shoppinghistory.valid?
+    expect(@product_shoppinghistory.errors.full_messages).to include("Post code can't be blank", "Post code can't be blank", "Post code is invalid. Include hyphen(-)")
+  end
 end
 
 it 'post_codeにハイフンが含まれていない場合保存できないこと' do
@@ -80,4 +83,23 @@ it 'tokenが存在していない場合保存できないこと' do
   @product_shoppinghistory.valid?
   expect(@product_shoppinghistory.errors.full_messages).to include("Token can't be blank")
 end
+
+it 'user_idが空では購入できない' do
+  @product_shoppinghistory.user_id = nil
+  @product_shoppinghistory.valid?
+  expect(@product_shoppinghistory.errors.full_messages).to include("User can't be blank")
+end
+
+it 'product_idが空では購入できない' do
+  @product_shoppinghistory.product_id = nil
+  @product_shoppinghistory.valid?
+  expect(@product_shoppinghistory.errors.full_messages).to include("Product can't be blank")
+end
+
+it 'phone_numberが英数混合では登録できないこと' do
+    @product_shoppinghistory.phone_number = '090abcd5678'
+    @product_shoppinghistory.valid?
+    expect(@product_shoppinghistory.errors.full_messages).to include("Phone number is invalid")
+  end
+  
 end
